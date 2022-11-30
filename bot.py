@@ -96,7 +96,7 @@ def get_message():
 @server.route('/')
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://telegram-bot-gsda.herokuapp.com/' + API_KEY)
+    bot.set_webhook(url='https://gsda-telegram-bot.netlify.app/' + API_KEY)
     return '!', 200
 
 
