@@ -12,7 +12,7 @@ from flask import Flask, request
 
 API_KEY = '5682851395:AAEe7D_j4mCabT2fsQpltiJuFOR75fSml_c'
 
-server = Flask(__name__)
+app = Flask(__name__)
 
 REQUEST_DEFAULT = 'default'
 REQUEST_CPF = 'cpf'
@@ -87,13 +87,13 @@ def echo_all(message):
 
 # FLASK SERVER
 
-@server.route('/' + API_KEY, methods=['POST'])
+@app.route('/' + API_KEY, methods=['POST'])
 def get_message():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode('utf-8'))])
     return 'Bot Online!', 200
 
 
-@server.route('/')
+@app.route('/')
 def webhook():
     bot.remove_webhook()
     bot.set_webhook(url='http://18.216.97.113/' + API_KEY)
@@ -102,5 +102,5 @@ def webhook():
 
 
 if __name__ == '__main__':
-    server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
     bot.remove_webhook()
