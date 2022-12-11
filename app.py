@@ -96,11 +96,9 @@ def get_message():
 @app.route('/')
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='http://18.216.97.113/' + API_KEY)
-    bot.remove_webhook()
+    bot.set_webhook(url='https://18.216.97.113/' + API_KEY)
     return 'Bot Online!', 200
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
-    bot.remove_webhook()
