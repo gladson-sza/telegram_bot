@@ -11,10 +11,6 @@ API_KEY = '5682851395:AAEe7D_j4mCabT2fsQpltiJuFOR75fSml_c'
 
 app = Flask(__name__)
 
-WEBHOOK_HOST = '<ip/host where the bot is running>'
-WEBHOOK_PORT = 443  # 443, 80, 88 or 8443 (port need to be 'open')
-WEBHOOK_LISTEN = '0.0.0.0'  # In some VPS you may need to put here the IP addr
-
 WEBHOOK_SSL_CERT = './cert.pem'
 WEBHOOK_SSL_PRIV = './key.pem'
 
@@ -96,13 +92,10 @@ def get_message():
 
 @app.route('/')
 def set_webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url='https://18.216.97.113/433/' + API_KEY)
     return 'Bot Online!', 200
 
 
 if __name__ == '__main__':
-    app.run(host=WEBHOOK_LISTEN,
-            port=WEBHOOK_PORT,
-            ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV)
-            )
+    app.run(host='0.0.0.0',
+            port=8000,
+            ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV))
