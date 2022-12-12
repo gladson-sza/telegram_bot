@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1vC6o3AeBQOCmhyR_KCVvs_a37T9_wQHU
 """
 import telebot
-import os
 from flask import Flask, request
 
 API_KEY = '5682851395:AAEe7D_j4mCabT2fsQpltiJuFOR75fSml_c'
@@ -102,12 +101,12 @@ def get_message():
 
 @app.route('/')
 def set_webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://18.216.97.113/433/' + API_KEY)
     return 'Bot Online!', 200
 
 
 if __name__ == '__main__':
-    bot.remove_webhook()
-    bot.set_webhook(url='https://18.216.97.113/433/' + API_KEY)
     app.run(host=WEBHOOK_LISTEN,
             port=WEBHOOK_PORT,
             ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV)
