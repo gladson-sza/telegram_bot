@@ -101,13 +101,16 @@ def get_message():
 
 @app.route('/')
 def set_webhook():
-    bot.remove_webhook()
+
     bot.set_webhook(url='https://18.216.97.113/433/' + API_KEY)
     return 'Bot Online!', 200
 
 
 if __name__ == '__main__':
+    bot.remove_webhook()
     app.run(host=WEBHOOK_LISTEN,
             port=WEBHOOK_PORT,
             ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV)
             )
+
+    bot.polling()
